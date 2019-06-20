@@ -2,7 +2,7 @@
     <a-layout-sider :trigger="null" collapsible v-model="collapsed">
         <h3 class="logo">
             <img src="../assets/img/Vue.png">
-            {{collapsed ? '': "I LOVE YOU"}}
+            <span>{{logoText}}</span>
         </h3>
         <a-menu theme="dark" mode="inline" :defaultSelectedKeys="[$route.path]">
             <template v-for="item in menu">
@@ -30,12 +30,26 @@
         props: ["collapsed"],
         data() {
             return {
+                logoText: "I LOVE YOU",
                 menu: localStorage.menu ? JSON.parse(localStorage.menu) : []
             }
         },
-        methods:{
-            skip(e){
+        methods: {
+            skip(e) {
                 this.$router.push(e)
+            }
+        },
+        watch: {
+            collapsed: {
+                handler(newName, oldName) {
+                    if (newName) {
+                        this.logoText = "";
+                    } else {
+                        this.common.sleep(200).then(() => {
+                            this.logoText = "I LOVE YOU"
+                        });
+                    }
+                }
             }
         }
     }

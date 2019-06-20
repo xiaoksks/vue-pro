@@ -107,6 +107,9 @@
     }
 </script>
 
+<style>
+    @import "../../assets/scss/animate.min.css";
+</style>
 <style lang="scss">
     .bg {
         position: relative;
