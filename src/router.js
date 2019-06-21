@@ -27,6 +27,12 @@ const router = new Router({
             },
             component: () => import("./views/Konva"),
         },{
+            path: 'fontawesome',
+            meta: {
+                title: "FontAwesome"
+            },
+            component: () => import("./views/FontAwesome"),
+        },{
             path: 'testMenu1',
             meta: {
                 title: "testMenu1"

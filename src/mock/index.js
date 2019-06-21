@@ -25,6 +25,12 @@ if (debug) {
                     children: []
                 },
                 {
+                    name: "FontAwesome",
+                    router: "/fontawesome",
+                    icon: "crown",
+                    children: []
+                },
+                {
                     name: "导航测试",
                     router: "/",
                     icon: "experiment",

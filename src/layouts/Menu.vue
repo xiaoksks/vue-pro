@@ -1,23 +1,24 @@
 <template>
-    <a-layout-sider :trigger="null" collapsible v-model="collapsed">
+    <a-layout-sider width="220px" :trigger="null" collapsible v-model="collapsed">
         <h3 class="logo">
             <img src="../assets/img/Vue.png">
             <span>{{logoText}}</span>
         </h3>
-        <a-menu theme="dark" mode="inline" :defaultSelectedKeys="[$route.path]">
+        <a-menu theme="dark" mode="inline" :defaultSelectedKeys="[$route.path]" @select="selectMenu">
             <template v-for="item in menu">
-                <a-sub-menu v-if="item.children.length !== 0" :key="item.router">
+                <a-sub-menu v-if="item.children.length !== 0">
                     <template slot="title">
-                        <a-icon :type="item.icon"/>
+                        <a-icon style="font-size: 16px" :type="item.icon"/>
                         <span>{{item.name}}</span>
                     </template>
                     <a-menu-item v-for="child in item.children" @click="skip(child.router)" :key="child.router">
+                        <a-icon style="font-size: 16px" :type="child.icon"/>
                         <span>{{child.name}}</span>
                     </a-menu-item>
                 </a-sub-menu>
 
                 <a-menu-item v-else :key="item.router" @click="skip(item.router)">
-                    <a-icon :type="item.icon"/>
+                    <a-icon style="font-size: 16px" :type="item.icon"/>
                     <span>{{item.name}}</span>
                 </a-menu-item>
             </template>
@@ -26,18 +27,53 @@
 </template>
 
 <script>
+    const logoText = "On The Moon";
     export default {
-        props: ["collapsed"],
+        props: ["collapsed","selectedMenu"],
         data() {
             return {
-                logoText: "I LOVE YOU",
-                menu: localStorage.menu ? JSON.parse(localStorage.menu) : []
+                logoText: logoText,
+                menu: localStorage.menu ? JSON.parse(localStorage.menu) : [],
             }
         },
         methods: {
             skip(e) {
                 this.$router.push(e)
+            },
+            selectMenu(item){
+                this.changeSelectedMenu(item.key)
+            },
+            changeSelectedMenu(key){
+                let menu = this.menu;
+                for(let i=0;i<menu.length;i++){
+                    if(menu[i].children.length ==0){
+                        if(this.menu[i].router == key){
+                            this.$emit('update:selectedMenu', {
+                                icon:this.menu[i].icon,
+                                title:this.menu[i].name,
+                            })
+                            return;
+                        }
+                    }else{
+                        for(let j=0;j<menu[i].children.length;j++){
+                            if(this.menu[i].children[j].router == key){
+                                this.$emit('update:selectedMenu', {
+                                    icon:this.menu[i].children[j].icon,
+                                    title:this.menu[i].children[j].name,
+                                    parent:{
+                                        icon:this.menu[i].icon,
+                                        title:this.menu[i].name,
+                                    }
+                                })
+                                return;
+                            }
+                        }
+                    }
+                }
             }
+        },
+        created(){
+            this.changeSelectedMenu(this.$route.path)
         },
         watch: {
             collapsed: {
@@ -46,7 +82,7 @@
                         this.logoText = "";
                     } else {
                         this.common.sleep(200).then(() => {
-                            this.logoText = "I LOVE YOU"
+                            this.logoText = logoText
                         });
                     }
                 }
@@ -56,16 +92,23 @@
 </script>
 
 <style scoped>
-    #components-layout-demo-custom-trigger .logo {
+    .logo {
         height: 28px;
         margin: 16px;
         color: #fff;
-        padding-left: 10px;
+        padding-left: 8px;
         line-height: 28px;
         font-size: 20px;
     }
-    #components-layout-demo-custom-trigger .logo img {
+    .logo img {
         margin-top: -6px;
         margin-right: 10px;
+    }
+    .logo img {
+        margin-top: -6px;
+        margin-right: 10px;
+    }
+    .ant-menu span{
+        font-size: 16px;
     }
 </style>

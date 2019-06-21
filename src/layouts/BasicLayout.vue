@@ -1,15 +1,14 @@
 <template>
-    <a-layout id="components-layout-demo-custom-trigger">
-        <Menu v-bind:collapsed="collapsed"/>
+    <a-layout>
+        <Menu :collapsed="collapsed" :selectedMenu.sync="selectedMenu"/>
         <a-layout>
-            <a-layout-header style="background: #fff; padding: 0">
-                <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-                        @click="()=> collapsed = !collapsed"/>
-                <Header/>
-            </a-layout-header>
-            <a-layout-content :style="{ margin: '24px 16px', minHeight: '280px' }">
+            <Header :collapsed.sync="collapsed" :selectedMenu="selectedMenu"/>
+            <a-layout-content :style="{ margin: '24px 16px', minHeight: '280px',padding: '24px', background:'#fff'}">
                 <router-view></router-view>
             </a-layout-content>
+            <a-layout-footer style="textAlign: center;font-size: 18px;padding:0 50px 16px 50px;">
+                On The Moon ©2019 自动化登月科技有限公司
+            </a-layout-footer>
         </a-layout>
     </a-layout>
 </template>
@@ -20,7 +19,8 @@
     export default {
         data() {
             return {
-                collapsed: false
+                collapsed: false,
+                selectedMenu:null
             }
         },
         components: {
@@ -29,17 +29,7 @@
         }
     }
 </script>
-<style>
-    #components-layout-demo-custom-trigger .trigger {
-        font-size: 18px;
-        line-height: 64px;
-        padding: 0 24px;
-        cursor: pointer;
-        transition: color .3s;
-    }
+<style >
 
-    #components-layout-demo-custom-trigger .trigger:hover {
-        color: #1890ff;
-    }
 </style>
 
