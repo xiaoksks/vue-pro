@@ -68,7 +68,7 @@
                     (err, values) => {
                         if (!err) {
                             this.$axios({
-                                url: "/api/login",
+                                url: "/login",
                                 method: "POST",
                                 data: {
                                     userName: values.userName,
@@ -111,14 +111,18 @@
 </style>
 <style lang="scss">
     .bg {
-        position: relative;
+        position: absolute;
         overflow: hidden;
-        height: 100%;
         display: flex;
+        top:0px;
+        left:0px;
+        right:0px;
+        bottom:0px;
         justify-content: center;
+        background-position: center center;
         align-items: center;
         background-image: url('../../assets/img/moon.jpeg');
-        background-size: contain;
+        background-size: cover;
 
         #particles-js {
             position: absolute;

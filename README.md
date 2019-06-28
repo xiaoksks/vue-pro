@@ -19,6 +19,7 @@ yarn lint
 ```
 
 ## Change Log
+2019-06-28
 * 引入vuex
 * 引入vue-cookies
 * 按需引入element-ui
