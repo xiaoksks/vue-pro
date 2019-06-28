@@ -1,9 +1,9 @@
 <template>
     <a-layout>
-        <Menu :collapsed="collapsed" :selectedMenu.sync="selectedMenu"/>
+        <Menu/>
         <a-layout>
-            <Header :collapsed.sync="collapsed" :selectedMenu="selectedMenu"/>
-            <a-layout-content :style="{ margin: '24px 16px', minHeight: '280px',padding: '24px', background:'#fff'}">
+            <Header/>
+            <a-layout-content :style="{ margin: '24px 16px', minHeight: 'auto',padding: '24px', background:'#fff'}">
                 <router-view></router-view>
             </a-layout-content>
             <a-layout-footer style="textAlign: center;font-size: 18px;padding:0 50px 16px 50px;">
@@ -17,12 +17,6 @@
     import Menu from "./Menu";
 
     export default {
-        data() {
-            return {
-                collapsed: false,
-                selectedMenu:null
-            }
-        },
         components: {
             Header,
             Menu,

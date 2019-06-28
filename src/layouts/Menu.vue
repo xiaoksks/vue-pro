@@ -1,5 +1,5 @@
 <template>
-    <a-layout-sider width="220px" :trigger="null" collapsible v-model="collapsed">
+    <a-layout-sider width="220px" :trigger="null" collapsible v-model="isCollapse">
         <h3 class="logo">
             <img src="../assets/img/Vue.png">
             <span>{{logoText}}</span>
@@ -29,11 +29,18 @@
 <script>
     const logoText = "On The Moon";
     export default {
-        props: ["collapsed","selectedMenu"],
+        computed: {
+            isCollapse() {
+                return this.$store.state.isCollapse
+            },
+            menu(){
+                let menu =  $cookies.get("menu");
+                return menu ? JSON.parse(menu) : []
+            }
+        },
         data() {
             return {
-                logoText: logoText,
-                menu: localStorage.menu ? JSON.parse(localStorage.menu) : [],
+                logoText: logoText
             }
         },
         methods: {
@@ -48,7 +55,7 @@
                 for(let i=0;i<menu.length;i++){
                     if(menu[i].children.length ==0){
                         if(this.menu[i].router == key){
-                            this.$emit('update:selectedMenu', {
+                            this.$store.commit('selectedMenu',{
                                 icon:this.menu[i].icon,
                                 title:this.menu[i].name,
                             })
@@ -57,7 +64,7 @@
                     }else{
                         for(let j=0;j<menu[i].children.length;j++){
                             if(this.menu[i].children[j].router == key){
-                                this.$emit('update:selectedMenu', {
+                                this.$store.commit('selectedMenu', {
                                     icon:this.menu[i].children[j].icon,
                                     title:this.menu[i].children[j].name,
                                     parent:{
@@ -76,7 +83,7 @@
             this.changeSelectedMenu(this.$route.path)
         },
         watch: {
-            collapsed: {
+            isCollapse: {
                 handler(newName, oldName) {
                     if (newName) {
                         this.logoText = "";

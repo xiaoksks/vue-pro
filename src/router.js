@@ -33,6 +33,12 @@ const router = new Router({
             },
             component: () => import("./views/FontAwesome"),
         },{
+            path: 'elementUI',
+            meta: {
+                title: "饿了么UI"
+            },
+            component: () => import("./views/ElementUI"),
+        },{
             path: 'testMenu1',
             meta: {
                 title: "testMenu1"
@@ -51,7 +57,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     // 自动化修改页面标签的 title
     document.title = to.meta.title;
-    if (to.path != "/login" && !localStorage.token) {
+    if (to.path != "/login" && !$cookies.get("token")) {
         next("/login")
     } else {
         next()

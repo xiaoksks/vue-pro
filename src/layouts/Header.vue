@@ -1,7 +1,6 @@
 <template>
     <a-layout-header style="background: #fff; padding: 0">
-        <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-                @click="trigger"/>
+        <a-icon class="trigger" :type="isCollapse ? 'menu-unfold' : 'menu-fold'" @click="trigger"/>
         <a-breadcrumb class="breadcrumb">
             <a-breadcrumb-item>
                 <a-icon type="home"/>
@@ -21,6 +20,7 @@
                 <a>
                     <a-avatar :size="50" :src="require('../assets/img/user.jpg')"/>
                     <span>{{userName}}</span>
+                    <a-icon style="margin-left: 10px;font-size: 16px;" type="caret-down"/>
                 </a>
                 <a-menu slot="overlay" style="top:25px;width: 150px;">
                     <a-menu-item key="1" @click="logout">
@@ -35,19 +35,26 @@
 
 <script>
     export default {
-        props: ["collapsed","selectedMenu"],
+        computed: {
+            isCollapse() {
+                return this.$store.state.isCollapse
+            },
+            selectedMenu() {
+                return this.$store.state.selectedMenu
+            }
+        },
         data() {
             return {
-                userName: localStorage.userName || ''
+                userName: $cookies.get("userName") || ''
             }
         },
         methods: {
             trigger() {
-                this.$emit('update:collapsed', !this.collapsed)
+                this.$store.commit('collapse')
             },
             logout() {
-                delete localStorage.token;
-                this.$router.push("/login")
+                $cookies.remove("token");
+                this.$router.push("/login");
             }
         }
     };

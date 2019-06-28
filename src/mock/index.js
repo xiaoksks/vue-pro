@@ -3,9 +3,8 @@ import Mock from "mockjs";
 let debug = 1;
 if (debug) {
     Mock.mock(/login/, {
-        id: "@integer(1,10)",
+        id: "@string(30)",
         "userName|1": ["张三", "李四", "王五", "路人甲", "路人乙", "路人丙", "路人丁"],
-        token: "@string(30)",
         msg: "success",
         status: "YQ-000"
     });
@@ -31,15 +30,23 @@ if (debug) {
                     children: []
                 },
                 {
+                    name: "饿了么UI",
+                    router: "/elementUI",
+                    icon: "ie",
+                    children: []
+                },
+                {
                     name: "导航测试",
                     router: "/",
                     icon: "experiment",
                     children: [{
                         name: "导航测试1",
                         router: "/testMenu1",
+                        icon: "experiment",
                     },{
                         name: "导航测试2",
                         router: "/testMenu2",
+                        icon: "experiment",
                     }]
                 }
             ]

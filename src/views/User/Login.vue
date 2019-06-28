@@ -76,9 +76,8 @@
                                 }
                             }).then(res => {
                                 if (res.data.msg == "success") {
-                                    localStorage.id = res.data.id;
-                                    localStorage.userName = res.data.userName;
-                                    localStorage.token = res.data.token;
+                                    $cookies.set("token",res.data.id,0);
+                                    $cookies.set("userName",res.data.userName,0);
                                     this.getMenu();
                                 } else {
                                     alert("用户名或密码错误！")
@@ -96,7 +95,7 @@
                 }).then(res => {
                     // 提取菜单数组，交给本地存储
                     let menu = res.data.data.menu;
-                    localStorage.menu = JSON.stringify(menu);
+                    $cookies.set("menu",JSON.stringify(menu),0);
                     this.$router.push("/table")
                 });
             },
