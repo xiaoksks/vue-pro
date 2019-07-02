@@ -36,8 +36,14 @@ if (debug) {
                     children: []
                 },
                 {
+                    name: "报警测试",
+                    router: "/alarm",
+                    icon: "bell",
+                    children: []
+                },
+                {
                     name: "导航测试",
-                    router: "/",
+                    key: "menuTest",
                     icon: "experiment",
                     children: [{
                         name: "导航测试1",

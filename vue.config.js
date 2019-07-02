@@ -1,9 +1,3 @@
-const path = require('path')
-const debug = process.env.NODE_ENV !== 'production'
-//const VueConf = require('./src/assets/js/libs/vue_config_class')
-//const vueConf = new VueConf(process.argv)
-
-
 module.exports = {
     publicPath: './', //vueConf.baseUrl, // 根域上下文目录
     outputDir: 'dist', // 构建输出目录
@@ -11,6 +5,16 @@ module.exports = {
     lintOnSave: false, // 是否开启eslint保存检测，有效值：ture | false | 'error'
     runtimeCompiler: true, // 运行时版本是否需要编译
     transpileDependencies: [], // 默认babel-loader忽略mode_modules，这里可增加例外的依赖包名
+    // chainWebpack: config => {
+    //     config.entry.app = ['babel-polyfill', './src/main.js'];
+    //     // 修复HMR
+    //     config.resolve.symlinks(true);
+    //     //修复 Lazy loading routes Error
+    //     config.plugin('html').tap(args => {
+    //         args[0].chunksSortMode = 'none';
+    //         return args;
+    //     });
+    // },
     productionSourceMap: false, // 是否在构建生产包时生成 sourceMap 文件，false将提高构建速度
     css: { // 配置高于chainWebpack中关于css loader的配置
         // modules: true, // 是否开启支持‘foo.module.css’样式
@@ -30,15 +34,18 @@ module.exports = {
     devServer: {
         open: true,
         host: '0.0.0.0',
-        port: 3000,
+        port: 5000,
         https: false,
         hotOnly: false,
         proxy: null,
         // proxy: {
         //     '/api': {
-        //         target: '<url>',
-        //         ws: true,
-        //         changOrigin: true
+        //         // target: 'http://127.0.0.1:8080',
+        //         target: 'http://192.168.30.9:9090',
+        //         changeOrigin: true,
+        //         pathRewrite: {
+        //             '^/api': '/'
+        //         }
         //     }
         // },
         before: app => {

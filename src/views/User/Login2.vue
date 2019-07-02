@@ -26,24 +26,6 @@
                 </a-form-item>
             </a-form>
         </div>
-        <vue-particles
-                color="#fff"
-                :particleOpacity="0.7"
-                :particlesNumber="30"
-                shapeType="star"
-                :particleSize="5"
-                linesColor="#fff"
-                :linesWidth="2"
-                :lineLinked="true"
-                :lineOpacity="0.4"
-                :linesDistance="150"
-                :moveSpeed="3"
-                :hoverEffect="true"
-                hoverMode="grab"
-                :clickEffect="true"
-                clickMode="push"
-        >
-        </vue-particles>
     </div>
 </template>
 
@@ -78,7 +60,7 @@
                                 if (res.data.msg == "success") {
                                     $cookies.set("token",res.data.id,0);
                                     $cookies.set("userName",res.data.userName,0);
-                                    this.$router.push("/")
+                                    this.getMenu();
                                 } else {
                                     alert("用户名或密码错误！")
                                     return false;
@@ -87,6 +69,17 @@
                         }
                     },
                 );
+            },
+            getMenu() {
+                this.$axios({
+                    url: "getMenu",
+                    method: "GET"
+                }).then(res => {
+                    // 提取菜单数组，交给本地存储
+                    let menu = res.data.data.menu;
+                    $cookies.set("menu",JSON.stringify(menu),0);
+                    this.$router.push("/table")
+                });
             },
             openMsg() {
                 this.$message.warning('你咋不忘记自己的名字？');
@@ -100,72 +93,64 @@
 </style>
 <style lang="scss">
     .bg {
-        position: absolute;
         overflow: hidden;
+        height: 100vh;
         display: flex;
-        top:0px;
-        left:0px;
-        right:0px;
-        bottom:0px;
         justify-content: center;
-        background-position: center center;
         align-items: center;
         background-image: url('../../assets/img/moon.jpeg');
         background-size: cover;
-
-        #particles-js {
+        background-position: center center;
+        &::before {
+            background-color: rgba(0, 0, 0, 0.4);
             position: absolute;
-            top: 0;
-            bottom: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
             left: 0;
-            right: 0;
+            top: 0;
+            content: "";
         }
     }
-
     .login-wrap {
-        width: 370px;
-        border-radius: 5px;
-        padding: 20px;
+        width: 310px;
+        padding: 30px;
         z-index: 3;
-        margin-right: -60%;
-        background: rgba(216, 220, 229, 0.5);
-
+        position: relative;
         .el-form-item {
             margin-bottom: 25px !important;
         }
-
         h3 {
             text-align: center;
             color: #ebedef;
             margin-top: 0px;
-            margin-bottom: 5px;
-
+            margin-bottom: 15px;
+            font-size: 22px;
             span {
-                color: #fff;
+                color: #8c99e0;
             }
         }
-
+        p {
+            text-align: center;
+            color: #fff;
+            margin: 0;
+        }
         form {
             margin-top: 25px;
-
             .el-form-item {
                 margin-bottom: 15px;
             }
-
-            span {
-                color: #fff;
-            }
         }
-
         a {
             text-decoration: none;
-            float: right;
-            color: #fff;
+            color: #1f2d3d;
         }
-
         button {
             width: 100%;
             font-weight: 600;
+            border: none;
+            border-radius: 0;
         }
     }
 </style>

@@ -4,20 +4,21 @@
             <img src="../assets/img/Vue.png">
             <span>{{logoText}}</span>
         </h3>
-        <a-menu theme="dark" mode="inline" :defaultSelectedKeys="[$route.path]" @select="selectMenu">
+        <a-menu theme="dark" mode="inline" :defaultSelectedKeys="[$route.path]" :defaultOpenKeys="defaultOpenKeys"
+                @select="selectMenu">
             <template v-for="item in menu">
-                <a-sub-menu v-if="item.children.length !== 0">
+                <a-sub-menu v-if="item.children.length !== 0" :key="item.key">
                     <template slot="title">
                         <a-icon style="font-size: 16px" :type="item.icon"/>
                         <span>{{item.name}}</span>
                     </template>
-                    <a-menu-item v-for="child in item.children" @click="skip(child.router)" :key="child.router">
+                    <a-menu-item v-for="child in item.children" :key="child.router">
                         <a-icon style="font-size: 16px" :type="child.icon"/>
                         <span>{{child.name}}</span>
                     </a-menu-item>
                 </a-sub-menu>
 
-                <a-menu-item v-else :key="item.router" @click="skip(item.router)">
+                <a-menu-item v-else :key="item.router">
                     <a-icon style="font-size: 16px" :type="item.icon"/>
                     <span>{{item.name}}</span>
                 </a-menu-item>
@@ -32,22 +33,57 @@
         computed: {
             isCollapse() {
                 return this.$store.state.isCollapse
-            },
-            menu(){
-                let menu =  $cookies.get("menu");
-                return menu ? JSON.parse(menu) : []
             }
         },
         data() {
             return {
-                logoText: logoText
+                logoText: logoText,
+                menu:[
+                    {
+                        name: "综合表格",
+                        router: "/table",
+                        icon: "table",
+                        children: []
+                    },
+                    {
+                        name: "绘图",
+                        router: "/konva",
+                        icon: "gateway",
+                        children: []
+                    },
+                    {
+                        name: "FontAwesome",
+                        router: "/fontawesome",
+                        icon: "crown",
+                        children: []
+                    },
+                    {
+                        name: "饿了么UI",
+                        router: "/elementUI",
+                        icon: "ie",
+                        children: []
+                    },
+                    {
+                        name: "导航测试",
+                        key: "menuTest",
+                        icon: "experiment",
+                        children: [{
+                            name: "导航测试1",
+                            router: "/testMenu1",
+                            icon: "experiment",
+                        },{
+                            name: "导航测试2",
+                            router: "/testMenu2",
+                            icon: "experiment",
+                        }]
+                    }
+                ],
+                defaultOpenKeys:[],
             }
         },
         methods: {
-            skip(e) {
-                this.$router.push(e)
-            },
             selectMenu(item){
+                this.$router.push(item.key)
                 this.changeSelectedMenu(item.key)
             },
             changeSelectedMenu(key){
@@ -72,6 +108,7 @@
                                         title:this.menu[i].name,
                                     }
                                 })
+                                this.defaultOpenKeys = [this.menu[i].key]
                                 return;
                             }
                         }
@@ -93,17 +130,16 @@
                         });
                     }
                 }
-            }
+            },
         }
     }
 </script>
 
-<style scoped>
+<style>
     .logo {
         height: 28px;
         margin: 16px;
         color: #fff;
-        padding-left: 8px;
         line-height: 28px;
         font-size: 20px;
     }
@@ -111,11 +147,13 @@
         margin-top: -6px;
         margin-right: 10px;
     }
-    .logo img {
-        margin-top: -6px;
-        margin-right: 10px;
-    }
-    .ant-menu span{
+    .ant-menu span {
         font-size: 16px;
+    }
+    .ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:after, .ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:after, .ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:after, .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:after, .ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before, .ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before, .ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before, .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before {
+        background: rgba(255, 255, 255, 1) !important;
+    }
+    .ant-menu-submenu-title:hover .ant-menu-submenu-arrow {
+        opacity: 1 !important;
     }
 </style>

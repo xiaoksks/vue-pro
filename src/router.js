@@ -10,6 +10,12 @@ const router = new Router({
             title: "登录界面"
         },
         component: () => import("./views/User/Login"),
+    },{
+        path: '/login2',
+        meta: {
+            title: "登录界面"
+        },
+        component: () => import("./views/User/Login2"),
     }, {
         path: '/',
         component: () => import("./layouts/BasicLayout"),

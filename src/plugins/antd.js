@@ -13,9 +13,11 @@ import {
     Col,
     Breadcrumb,
     Dropdown,
-    Avatar
+    Avatar,
+    Radio,
+    LocaleProvider
 } from 'ant-design-vue'
-import "ant-design-vue/dist/antd.css";
+import '../assets/scss/antd-variables.scss'
 
 Vue.use(Button)
 Vue.use(Table)
@@ -31,3 +33,5 @@ Vue.use(Col)
 Vue.use(Breadcrumb)
 Vue.use(Dropdown)
 Vue.use(Avatar)
+Vue.use(Radio)
+Vue.use(LocaleProvider)

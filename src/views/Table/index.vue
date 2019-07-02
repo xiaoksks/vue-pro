@@ -17,7 +17,7 @@
                 </a-button>
             </div>
             <a-table bordered rowKey="id" :dataSource="dataSource" :columns="columns" :pagination="pagination"
-                     @change="aaa">
+                     @change="aaa" >
                 <span slot="operation" slot-scope="text,record">
                     <a-button type="danger" size="small" @click="remove(record.id)">删除</a-button>
                 </span>

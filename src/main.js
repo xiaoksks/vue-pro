@@ -1,3 +1,4 @@
+import "babel-polyfill"
 import Vue from 'vue'
 import App from './App.vue'
 import router from "./router";
@@ -5,16 +6,16 @@ import store from './store'
 import axios from 'axios'
 import 'vue-cookies'
 import '@/mock'
-//粒子特效
+//粒子特效,ie下需要修改index语法
 import VueParticles from 'vue-particles'
 //公共js
 import common from './assets/js/common.js'
 //引入vue-fontawesome https://github.com/FortAwesome/vue-fontawesome
 import './plugins/fontawesome.js'
-//引入element-ui
-import './plugins/element.js'
 //引入ant-design
 import './plugins/antd.js'
+//引入element-ui
+import './plugins/element.js'
 
 Vue.use(VueParticles)
 Vue.prototype.$axios = axios
