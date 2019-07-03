@@ -51,7 +51,7 @@
                 addLineRadio: "",
                 stageSize: {
                     width: 1440,
-                    height: 850
+                    height: 700
                 },
                 v_image: [],
                 v_text: [],

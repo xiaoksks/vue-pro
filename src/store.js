@@ -12,7 +12,15 @@ export default new Vuex.Store({
     },
     mutations: {
         collapse(state) {
-            state.isCollapse = !state.isCollapse
+            state.isCollapse = !state.isCollapse;
+            //ie9兼容
+            if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/9./i)=="9.") {
+                if(state.isCollapse){
+                    document.getElementsByClassName("ant-layout")[1].style.marginLeft = "80px"
+                }else{
+                    document.getElementsByClassName("ant-layout")[1].style.marginLeft = "220px"
+                }
+            }
         },
         selectedMenu(state,menu){
             state.selectedMenu = menu

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    const logoText = "On The Moon";
+    const logoText = "I LOVE VUE";
     export default {
         computed: {
             isCollapse() {

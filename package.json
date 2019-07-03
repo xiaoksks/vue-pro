@@ -1,5 +1,5 @@
 {
-  "name": "antd",
+  "name": "myapp",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,14 +15,13 @@
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "ant-design-vue": "^1.3.10",
     "axios": "^0.19.0",
-    "core-js": "^2.6.5",
+    "core-js": "^2.6.9",
     "element-ui": "^2.10.1",
     "konva": "^3.3.3",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.6.10",
     "vue-cookies": "^1.5.13",
     "vue-konva": "^2.0.7",
-    "vue-particles": "^1.0.9",
     "vue-router": "^3.0.6",
     "vuex": "^3.1.1"
   },
@@ -36,14 +35,16 @@
     "babel-polyfill": "^6.26.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^7.1.0",
+    "node-sass": "^4.9.2",
+    "sass-loader": "^7.0.3",
+    "vue-cli-plugin-element": "^1.0.1",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "node": true,
+      "browser": true
     },
     "extends": [
       "plugin:vue/essential",
@@ -61,7 +62,6 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
+    "last 2 versions"
   ]
 }

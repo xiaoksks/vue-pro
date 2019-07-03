@@ -7,7 +7,7 @@
                 <router-view></router-view>
             </a-layout-content>
             <a-layout-footer style="textAlign: center;font-size: 18px;padding:0 50px 20px 50px;">
-                郑煤机中缸桶 ©2019 浙江智昌机器人科技有限公司
+                VUE ©2019 自动化科技有限公司
             </a-layout-footer>
         </a-layout>
     </a-layout>

@@ -1,7 +1,7 @@
 <template>
     <div class="bg">
         <div class="login-wrap animated flipInY">
-            <h3>欢迎使用自动化登月系统</h3>
+            <h3>欢迎使用自动化系统</h3>
             <a-form :form="form" @submit="login">
                 <a-form-item>
                     <a-input v-decorator="decorator.userName" placeholder="用户名">
@@ -26,24 +26,6 @@
                 </a-form-item>
             </a-form>
         </div>
-        <vue-particles
-                color="#fff"
-                :particleOpacity="0.7"
-                :particlesNumber="30"
-                shapeType="star"
-                :particleSize="5"
-                linesColor="#fff"
-                :linesWidth="2"
-                :lineLinked="true"
-                :lineOpacity="0.4"
-                :linesDistance="150"
-                :moveSpeed="3"
-                :hoverEffect="true"
-                hoverMode="grab"
-                :clickEffect="true"
-                clickMode="push"
-        >
-        </vue-particles>
     </div>
 </template>
 
@@ -100,35 +82,24 @@
 </style>
 <style lang="scss">
     .bg {
-        position: absolute;
-        overflow: hidden;
-        display: flex;
-        top:0px;
-        left:0px;
-        right:0px;
-        bottom:0px;
-        justify-content: center;
-        background-position: center center;
-        align-items: center;
-        background-image: url('../../assets/img/moon.jpeg');
-        background-size: cover;
-
-        #particles-js {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
+        height:100%;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-attachment: fixed;
+        background-image: url('../../assets/img/city.jpeg');
     }
 
     .login-wrap {
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin:-150px 0 0 -200px;
+
         width: 370px;
         border-radius: 5px;
         padding: 20px;
         z-index: 3;
-        margin-right: -60%;
-        background: rgba(216, 220, 229, 0.5);
+        background: rgba(38, 104, 198, 0.55);
 
         .el-form-item {
             margin-bottom: 25px !important;
@@ -136,7 +107,7 @@
 
         h3 {
             text-align: center;
-            color: #ebedef;
+            color: #fff;
             margin-top: 0px;
             margin-bottom: 5px;
 

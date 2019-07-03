@@ -6,8 +6,6 @@ import store from './store'
 import axios from 'axios'
 import 'vue-cookies'
 import '@/mock'
-//粒子特效,ie下需要修改index语法
-import VueParticles from 'vue-particles'
 //公共js
 import common from './assets/js/common.js'
 //引入vue-fontawesome https://github.com/FortAwesome/vue-fontawesome
@@ -17,13 +15,12 @@ import './plugins/antd.js'
 //引入element-ui
 import './plugins/element.js'
 
-Vue.use(VueParticles)
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.prototype.common = common;
 
 new Vue({
-    store,
-    router,
-    render: h => h(App)
+  store,
+  router,
+  render: h => h(App)
 }).$mount("#app")
