@@ -19,7 +19,7 @@
             <a-dropdown>
                 <a>
                     <a-avatar :size="50" :src="require('../assets/img/user.jpg')"/>
-                    <span>{{userName}}</span>
+                    <span>{{username}}</span>
                     <a-icon style="margin-left: 10px;font-size: 16px;" type="caret-down"/>
                 </a>
                 <a-menu slot="overlay" style="top:25px;width: 150px;">
@@ -45,7 +45,7 @@
         },
         data() {
             return {
-                userName: $cookies.get("userName") || ''
+                username: $cookies.get("username") || ''
             }
         },
         methods: {
@@ -53,8 +53,8 @@
                 this.$store.commit('collapse')
             },
             logout() {
-                $cookies.remove("token");
                 this.$router.push("/login");
+                $cookies.remove("token");
             }
         }
     };

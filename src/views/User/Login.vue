@@ -4,7 +4,7 @@
             <h3>欢迎使用自动化系统</h3>
             <a-form :form="form" @submit="login">
                 <a-form-item>
-                    <a-input v-decorator="decorator.userName" placeholder="用户名">
+                    <a-input v-decorator="decorator.loginName" placeholder="用户名">
                         <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
                     </a-input>
                 </a-form-item>
@@ -35,7 +35,7 @@
         data() {
             return {
                 decorator: {
-                    userName: ['userName', {rules: [{required: true, message: '请输入用户名!'}]}],
+                    loginName: ['loginName', {rules: [{required: true, message: '请输入用户名!'}]}],
                     password: ['password', {rules: [{required: true, message: '请输入密码!'}]}]
                 }
             }
@@ -53,13 +53,13 @@
                                 url: "/login",
                                 method: "POST",
                                 data: {
-                                    userName: values.userName,
+                                    userName: values.loginName,
                                     password: values.password
                                 }
                             }).then(res => {
                                 if (res.data.msg == "success") {
                                     $cookies.set("token",res.data.id,0);
-                                    $cookies.set("userName",res.data.userName,0);
+                                    $cookies.set("username",res.data.username,0);
                                     this.$router.push("/")
                                 } else {
                                     alert("用户名或密码错误！")
