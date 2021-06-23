@@ -11,7 +11,8 @@
       "domain:webim.tim.qq.com",
       "domain:douyucdn.cn",
       "domain:battle.net",
-      "domain:hsreplay.net"
+      "domain:hsreplay.net",
+      "geosite:category-games@cn"
     ]
   },
   {
